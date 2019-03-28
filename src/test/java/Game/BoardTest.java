@@ -74,8 +74,24 @@ public class BoardTest {
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
             game.setBoardSize(2,5);
         });
-assertEquals("Za mała plansza! Musi być minimum 4x4!",exception.getMessage());
+assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być minimum 4x4!"));
 
+    }
+    @Test
+    @DisplayName("Sets Proper 9x9 board Test")
+    public void SetBoardSizeTest() {
+        game.createBoard();
+        game.setBoardSize(9,9);
+        assertThat((game.board.length == 9 && game.board[0].length == 9 ), isOneOf(true));
+
+    }
+    @Test
+    @DisplayName("Prints 9x9 test")
+    public void Board9x9PrintTest() {
+        game.createBoard();
+        game.setBoardSize(9,9);
+        game.printBoard();
+        assertThat(systemOutContent.toString(), startsWith("\r\n 0 0 0 0 0 0 0 0 0"));
     }
 }
 
