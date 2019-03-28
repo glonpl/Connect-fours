@@ -30,4 +30,8 @@ public class Board {
         board = new int[height][width];
 
     }
+
+
+
+
 }

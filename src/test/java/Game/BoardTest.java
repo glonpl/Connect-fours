@@ -93,6 +93,12 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
         game.printBoard();
         assertThat(systemOutContent.toString(), startsWith("\r\n 0 0 0 0 0 0 0 0 0"));
     }
+    @Test
+    @DisplayName("Win pattern test")
+    public void WinCheckTest() {
+        game.createBoard();
+        game.winCheck();
+    }
 }
 
 
