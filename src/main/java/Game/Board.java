@@ -23,10 +23,11 @@ public class Board {
         }
     }
 
+    public void setBoardSize(int row, int col) {
+        if ((row<4)||(col<4)) throw new IllegalArgumentException("Za mała plansza! Musi być minimum 4x4!");
+        height = row;
+        width = col;
+        board = new int[height][width];
 
-
-            if(size) throw new IllegalArgumentException("Za mała plansza!");
-
-
-
+    }
 }

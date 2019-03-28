@@ -58,13 +58,25 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("Sets new size of a board")//can throw exception if x or y <4
-    public void SetBoardSizeTest() {
+    @DisplayName("Sets wrong new size of a board, Exception test")//can throw exception if x or y <4
+    public void SetBoardSizeExceptionThrowTest() {
         game.createBoard();
-        game.setBoardSize(2,5);
-        assertEquals(systemOutContent.toString());//exception
-    }
+        assertThrows(Exception.class, () -> {
+            game.setBoardSize(2,5);
+        });
 
+
+    }
+    @Test
+    @DisplayName("Sets wrong new size of a board, Exception message test")//can throw exception if x or y <4
+    public void SetBoardSizeExceptionThrowMessageTest() {
+        game.createBoard();
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+            game.setBoardSize(2,5);
+        });
+assertEquals("Za mała plansza! Musi być minimum 4x4!",exception.getMessage());
+
+    }
 }
 
 
