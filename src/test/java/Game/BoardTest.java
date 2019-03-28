@@ -9,15 +9,34 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 public class BoardTest {
 
+    private PrintStream originalSystemOut;
+    private ByteArrayOutputStream systemOutContent;
     private Board game;
 
     @BeforeEach
     public void setUp() {
         game = new Board();
+        originalSystemOut = System.out;
+
+        // given
+        systemOutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(systemOutContent));
     }
 
+
+
+
+    @AfterEach
+    void restoreSystemOutStream() {
+        System.setOut(originalSystemOut);
+    }
 
 
 
@@ -29,13 +48,13 @@ public class BoardTest {
       assertTrue(game.board.length == 6 && game.board[0].length == 7 );
 
     }
+
     @Test
     @DisplayName("Prints 0 filled board test")
     public void CreateBoard0FillPrintTest() {
         game.createBoard();
-
-        assertEquals(game.board.printBoard," sad " );
-
+        game.printBoard();
+        assertEquals(String.format("\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0"),systemOutContent.toString());
     }
 
 

@@ -13,4 +13,13 @@ public class Board {
         }
     }
 
+    public void printBoard(){
+
+        for(int i=0; i<height; i++) {
+            System.out.println();
+            for(int j=0; j<width; j++) {
+                System.out.print(" "+board[i][j]);
+            }
+        }
+    }
 }
