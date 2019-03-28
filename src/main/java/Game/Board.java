@@ -30,8 +30,16 @@ public class Board {
         board = new int[height][width];
 
     }
+    public void winCheck(int column, int row, int disc, String player) {
+
+        int sumhor=0,sumver=0,sumdiagup=0,sumdiagdown=0;//-|/\
+        //dsc 5 i 1, bo łatwo odróżnić od zera i siebie nawzajem
+        //zaczynasz od miejsca wyladowania
+        // sumhor( idz w prawo i while(disc==val[col][row+i]){sum+1; i+1} jak wyjddzie z while idz w lewo i while(disc==val[col][row-i]){sum+1; i+1}
+        // sumver( idz tylko w dol )
+        // diagup/dwn po skosie sprawdzenie gora i dol
+    }
 
 
 
-
-}
+    }
