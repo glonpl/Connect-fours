@@ -22,4 +22,11 @@ public class Board {
             }
         }
     }
+
+
+
+            if(size) throw new IllegalArgumentException("Za mała plansza!");
+
+
+
 }

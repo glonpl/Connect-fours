@@ -57,7 +57,13 @@ public class BoardTest {
         assertEquals(String.format("\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0"),systemOutContent.toString());
     }
 
-
+    @Test
+    @DisplayName("Sets new size of a board")//can throw exception if x or y <4
+    public void SetBoardSizeTest() {
+        game.createBoard();
+        game.setBoardSize(2,5);
+        assertEquals(systemOutContent.toString());//exception
+    }
 
 }
 
