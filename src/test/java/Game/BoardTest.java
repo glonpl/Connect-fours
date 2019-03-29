@@ -94,10 +94,45 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
         assertThat(systemOutContent.toString(), startsWith("\r\n 0 0 0 0 0 0 0 0 0"));
     }
     @Test
-    @DisplayName("Win pattern test")
-    public void WinCheckTest() {
+    @DisplayName("Win pattern test | ")
+    public void WinCheckTestVer() {
         game.createBoard();
-        game.winCheck(3,3,1,"Zbychu");
+        int count=0;
+        for (count=1; count<5; count++){
+        game.board[count][0] = 1;}
+        game.winCheck(0,2,1,"Zbychu");
+       assertThat(game.winner, startsWith("Zby"));
+       }
+    @Test
+    @DisplayName("Win pattern test - ")
+    public void WinCheckTestHor() {
+        game.createBoard();
+        int count=0;
+        for (count=1; count<5; count++){
+            game.board[0][count] = 1;}
+        game.winCheck(2,0,1,"Ania");
+        assertThat(game.winner, endsWith("nia"));
+    }
+
+    @Test
+    @DisplayName("Win pattern test / ")
+    public void WinCheckTestVerUp() {
+        game.createBoard();
+        int count=0;
+        for (count=1; count<5; count++){
+            game.board[count][count] = 1;}
+        game.winCheck(2,2,1,"Zbychu");
+        assertThat(game.winner, containsString("bych"));
+    }
+    @Test
+    @DisplayName("Win pattern test \\ ")
+    public void WinCheckTestVerDown() {
+        game.createBoard();
+        int count=0;
+        for (count=5; count>1; count--){
+            game.board[count][count] = 1;}
+        game.winCheck(2,2,1,"Wojtek");
+        assertThat(game.winner, containsString("ojte"));
     }
 }
 
