@@ -1,5 +1,5 @@
 package Game;
-
+ /*
 
 import org.hamcrest.core.IsAnything;
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +19,7 @@ public class PlayerTest {
     private Board game;
     static Player sut;
     @BeforeEach
-    public void setUp() {
+   public void setUp() {
         public void setUp(){
 
         originalSystemOut = System.out;
@@ -48,3 +48,4 @@ public class PlayerTest {
         }    }
 
 }
+*/

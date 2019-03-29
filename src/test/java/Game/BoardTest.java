@@ -252,11 +252,16 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
         game.putCoin(3,5,"Zbychu");
         game.putCoin(3,1,"Franek");
         game.putCoin(2,5,"Zbychu");
+        game.backCoin();
+        game.backCoin();
 
-     //   game.backCoin();
-     //   game.backCoin();
-        //  game.backCoin();
-      //  game.backCoin();
+        game.printBoard();
+        assertThat(systemOutContent.toString(), endsWith("0 0 1 5 0 0 0"));
+         game.backCoin();
+
+        game.printBoard();
+        assertThat(systemOutContent.toString(), endsWith("0 0 1 0 0 0 0"));
+         game.backCoin();
 
 
         game.printBoard();
