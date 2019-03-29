@@ -97,7 +97,7 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
     @DisplayName("Win pattern test")
     public void WinCheckTest() {
         game.createBoard();
-        game.winCheck();
+        game.winCheck(3,3,1,"Zbychu");
     }
 }
 
