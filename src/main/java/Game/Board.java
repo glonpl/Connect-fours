@@ -1,10 +1,13 @@
 package Game;
 
+import java.util.ArrayList;
+
 public class Board {
     private int height = 6;
     private int width = 7;
     public int[][] board = new int[height][width];
     protected String winner;
+    private ArrayList<Integer> history;
 
     public void createBoard() {
         for(int i=0; i<height; i++) {
@@ -127,6 +130,7 @@ public class Board {
 
                     if (board[i][row] == 0) {
                         board[i][row] = disc;
+                        history.add(row);
                         winCheck(row,i,disc,player);
                         return true;
                     }
