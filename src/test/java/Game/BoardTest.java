@@ -245,12 +245,12 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
     }
 
     @Test
-    @DisplayName("Check if sets Winner angled- ")
+    @DisplayName("Check if moves back ")
     public void MoveBack()throws Exception {
         game.createBoard();
         game.putCoin(2,1,"Franek");
-        game.putCoin(2,5,"Zbychu");
-        game.putCoin(2,1,"Franek");
+        game.putCoin(3,5,"Zbychu");
+        game.putCoin(3,1,"Franek");
         game.putCoin(2,5,"Zbychu");
 
         game.backCoin();
