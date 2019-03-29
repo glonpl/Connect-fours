@@ -25,3 +25,11 @@ hs_err_pid*
 .idea/modules.xml
 .idea/misc.xml
 .idea/workspace.xml
+.idea/encodings.xml
+target/jacoco.exec
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+target/surefire-reports/Game.BoardTest.txt
+target/surefire-reports/TEST-Game.BoardTest.xml
