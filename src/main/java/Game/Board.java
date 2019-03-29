@@ -120,7 +120,11 @@ public class Board {
 
 
     }
+    public void putCoin(int row,int disc,String player){
+        
 
+
+    }
 
 
     }

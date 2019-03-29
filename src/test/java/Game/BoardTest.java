@@ -136,17 +136,13 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
     }
 
 
-/*
     @Test
     @DisplayName("Check if disc falls ")
-    public void WinCheckTestVerDown() {
+    public void FallDownTest() {
         game.createBoard();
-        int count=0;
-        for (count=5; count>1; count--){
-            game.board[count][count] = 1;}
-        game.winCheck(2,2,1,"Wojtek");
-        assertThat(game.winner, containsString("ojte"));
-    }*/
+        game.putCoin(row,disc,player);
+       game.printBoard();
+    }
 }
 
 
