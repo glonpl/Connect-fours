@@ -35,7 +35,7 @@ public class Board {
 
         int sumhor=0,sumver=0,sumdiagup=0,sumdiagdown=0;//-|/\
         //hor (->)
-        for(int i=col; i<(width-1); i++) {
+        for(int i=row; i<(width-1); i++) {
             if(i < (width-1) && board[col][i + 1] == disc) {
                 sumhor++;
             } else
@@ -65,7 +65,7 @@ public class Board {
                 break;
         }
 
-        //diag ( / - )
+        //diag ( / + )
         int j = row;
         for(int i=col; i<height; i++) {
             if(( i + 1) < height && ( j - 1) >= 0 && board[i + 1][j - 1] == disc) {
@@ -75,7 +75,7 @@ public class Board {
             j--;
         }
 
-        //diag ( / + )
+        //diag ( / - )
         j = row;
         for(int i=col; i>0; i--) {
             if((i-1) > 0 && (j+1) < width && board[i - 1][j + 1] == disc) {
@@ -113,18 +113,30 @@ public class Board {
 
 
     }
-    public void putCoin(int row,int disc,String player)throws Exception {
-        if ( row < 0 || row > width) {
+    public boolean putCoin(int row,int disc,String player)throws Exception {
+        if (row < 0 || row > width) {
             throw new Exception("Nie ma takiej kolumny!");
+        } else {
+
+            if (board[0][row] != 0) {
+                System.out.print("Kolumna, pełna! Wybierz inną!");
+                return false;
+            } else {
+                for (int i = height - 1; i >= 0; i--) {
+
+
+                    if (board[i][row] == 0) {
+                        board[i][row] = disc;
+                        winCheck(row,i,disc,player);
+                        return true;
+                    }
+
+
+                }
+                return false;
+
+            }
+
         }
-        else {
-
-
-            
-        }
-
-
-        }
-
-
+    }
     }

@@ -10,8 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class BoardTest {
@@ -40,7 +38,7 @@ public class BoardTest {
 
 
 
-    @Test
+    @Test//junit
     @DisplayName("Default board test")
     public void CreateBoardTest() {
         game.createBoard();
@@ -49,7 +47,7 @@ public class BoardTest {
 
     }
 
-    @Test
+    @Test                                                   //junit
     @DisplayName("Prints 0 filled board test")
     public void CreateBoard0FillPrintTest() {
         game.createBoard();
@@ -57,7 +55,7 @@ public class BoardTest {
         assertEquals(String.format("\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0"),systemOutContent.toString());
     }
 
-    @Test
+    @Test                                                    //junit
     @DisplayName("Sets wrong new size of a board, Exception test")//can throw exception if x or y <4
     public void SetBoardSizeExceptionThrowTest() {
         game.createBoard();
@@ -137,7 +135,7 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
 
 
 
-    @Test
+    @Test                                                           //junit
     @DisplayName("Checks if throws exception while trying to put coin in wrong column ")
     public void PutToWrongHoleTest()throws Exception {
         game.createBoard();
@@ -151,12 +149,99 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
     @DisplayName("Check if disc falls ")
     public void FallDownTest()throws Exception {
         game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.printBoard();
+        assertThat(systemOutContent.toString(), endsWith("0 0 1 0 0 0 0"));
+    }
+    @Test
+    @DisplayName("Check if Informs that column is full ")
+    public void FullColumnPutTest()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
 
-            game.putCoin(2,1,"Franek");
+        assertThat(systemOutContent.toString(), endsWith("Wybierz inną!"));
+    }
+    @Test                                                       //junit
+    @DisplayName("Check if returns False if column full ")
+    public void FullColumnPutFALSETest()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
 
-        assertTrue(game.board[5][2]==1);
+        assertFalse(game.putCoin(2,1,"Franek"));
+    }
+    @Test
+    @DisplayName("Check if returns True after putted ")
+    public void FullColumnPutTrueTest()throws Exception {
+        game.createBoard();
+
+        assertThat(game.putCoin(2,1,"Franek"),is(true));
+    }
+    @Test
+    @DisplayName("Check if sets Winner column ")
+    public void FallWinTest()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,1,"Franek");
+
+
+        assertThat(game.winner,not(isEmptyOrNullString()));
+
+    }
+    @Test
+    @DisplayName("Check if sets Winner angled+ ")
+    public void FallWinAngleUpTest()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,5,"Zbychu");
+        game.putCoin(3,5,"Zbychu");
+        game.putCoin(4,1,"Franek");
+        game.putCoin(4,5,"Zbychu");
+        game.putCoin(4,1,"Franek");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(5,1,"Franek");
+        game.putCoin(5,5,"Zbychu");
+        game.putCoin(5,1,"Franek");
+        game.putCoin(5,1,"Franek");
+        assertThat(game.winner,isEmptyOrNullString());
+        game.putCoin(3,1,"Franek");
+        assertThat(game.winner,is("Franek"));
     }
 
+
+    @Test
+    @DisplayName("Check if sets Winner angled- ")
+    public void FallWinAngleDownTest()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,5,"Zbychu");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,5,"Zbychu");
+
+        game.putCoin(3,5,"Zbychu");
+        game.putCoin(3,5,"Zbychu");
+
+        game.putCoin(4,1,"Franek");
+        game.putCoin(4,5,"Zbychu");
+        assertThat(game.winner,isEmptyOrNullString());
+        game.putCoin(5,5,"Zbychu");
+        game.putCoin(3,5,"Zbychu");
+
+
+        assertThat(game.winner,is("Zbychu"));
+    }
 }
 
 
