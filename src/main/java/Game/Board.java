@@ -7,7 +7,7 @@ public class Board {
     private int width = 7;
     public int[][] board = new int[height][width];
     protected String winner;
-    private ArrayList<Integer> history;
+    private ArrayList<Integer> history = new ArrayList<>();
 
     public void createBoard() {
         for(int i=0; i<height; i++) {
@@ -143,4 +143,21 @@ public class Board {
 
         }
     }
+    public boolean backCoin(){
+
+           if (history.isEmpty()) {
+System.out.print("Nie można cofnąć!");
+return false;
+           }else {
+               int destroy = history.get(history.size() - 1);
+               int i=0;
+               while (board[i][destroy]==0){i++;}
+               if (board[i][destroy]!=0){
+                   board[i][destroy]=0;
+                   history.remove(history.size() - 1);
+              return true;
+               }
+           }
+          return false;
+        }
     }
