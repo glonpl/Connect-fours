@@ -235,12 +235,32 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
 
         game.putCoin(4,1,"Franek");
         game.putCoin(4,5,"Zbychu");
+
         assertThat(game.winner,isEmptyOrNullString());
+
         game.putCoin(5,5,"Zbychu");
         game.putCoin(3,5,"Zbychu");
 
-
         assertThat(game.winner,is("Zbychu"));
+    }
+
+    @Test
+    @DisplayName("Check if sets Winner angled- ")
+    public void MoveBack()throws Exception {
+        game.createBoard();
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,5,"Zbychu");
+        game.putCoin(2,1,"Franek");
+        game.putCoin(2,5,"Zbychu");
+
+        game.backCoin();
+        game.backCoin();
+        game.backCoin();
+        game.backCoin();
+
+
+        game.printBoard();
+        assertThat(systemOutContent.toString(), endsWith("0 0 0 0 0 0 0"));
     }
 }
 
