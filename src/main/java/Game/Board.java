@@ -34,13 +34,6 @@ public class Board {
     public void winCheck(int row, int col, int disc, String player) {
 
         int sumhor=0,sumver=0,sumdiagup=0,sumdiagdown=0;//-|/\
-        //dsc 5 i 1, bo łatwo odróżnić od zera i siebie nawzajem
-        //zaczynasz od miejsca wyladowania
-        // sumhor( idz w prawo i while(disc==val[row][col+i]){sum+1; i+1} jak wyjddzie z while idz w lewo i while(disc==val[row][col-i]){sum+1; i+1}
-        // sumver( idz tylko w dol )
-        // diagup/dwn po skosie sprawdzenie gora i dol
-
-
         //hor (->)
         for(int i=col; i<(width-1); i++) {
             if(i < (width-1) && board[col][i + 1] == disc) {
@@ -120,11 +113,18 @@ public class Board {
 
 
     }
-    public void putCoin(int row,int disc,String player){
-        
+    public void putCoin(int row,int disc,String player)throws Exception {
+        if ( row < 0 || row > width) {
+            throw new Exception("Nie ma takiej kolumny!");
+        }
+        else {
 
 
-    }
+            
+        }
+
+
+        }
 
 
     }

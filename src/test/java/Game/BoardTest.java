@@ -136,13 +136,27 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
     }
 
 
+
+    @Test
+    @DisplayName("Checks if throws exception while trying to put coin in wrong column ")
+    public void PutToWrongHoleTest()throws Exception {
+        game.createBoard();
+
+        Throwable exception = assertThrows(Exception.class, () -> {
+            game.putCoin(9,1,"Franek");
+        });
+        assertEquals("Nie ma takiej kolumny!", exception.getMessage());
+    }
     @Test
     @DisplayName("Check if disc falls ")
-    public void FallDownTest() {
+    public void FallDownTest()throws Exception {
         game.createBoard();
-        game.putCoin(row,disc,player);
-       game.printBoard();
+
+            game.putCoin(2,1,"Franek");
+
+        assertTrue(game.board[5][2]==1);
     }
+
 }
 
 
