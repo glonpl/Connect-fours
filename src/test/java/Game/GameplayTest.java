@@ -37,8 +37,8 @@ public class GameplayTest {
 
     @Test
     public void DrawTest () {
-sut.player1.setPlayer("Zbychu");
-sut.player2.setPlayer("Franek");
+sut.player1= new Player("Zbychu",0);
+sut.player2= new Player("Franek",1);
 
         assertThat(sut.PlayerNameTurn(true)).isEqualTo("Zbychu");
     }
