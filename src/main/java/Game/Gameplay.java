@@ -3,9 +3,9 @@ package Game;
 import java.util.Scanner;
 
 public class Gameplay {
-    public Player player1=new Player("",0);//testowane wczesniej TW
-    public Player player2=new Player("",1);//TW
-    public Board plansza;//TW
+    public Player player1=new Player("",0);
+    public Player player2=new Player("",1);
+    public Board plansza;
 
 private boolean turn=true;
     public int StandardBoard(String w) { //0wrong 1 standard  2change
