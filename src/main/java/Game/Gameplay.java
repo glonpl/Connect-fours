@@ -60,13 +60,19 @@ if(f.equals("c")){
     }
     plansza.printBoard();
     if (plansza.draw){
-        System.out.print("Remis!!\n");
+        System.out.print("\nRemis!!\n");
     }else{
-        System.out.print("Zwycięża "+plansza.winner+"!\n");
+        System.out.print("\nZwycięża "+plansza.winner+"!\n");
+        if(plansza.winner==player1.getPlayer()){
+            player1.PlayerWin();
+        }else if(plansza.winner==player2.getPlayer()){
+            player2.PlayerWin();
+        }
     }
     String f="";
     while(!(f.equals("T"))&!(f.equals("N")))
 {
+    System.out.print(player1.getPlayer()+": "+player1.getPlayerScore()+"  "+player2.getPlayer()+": "+player2.getPlayerScore()+"/n");
     System.out.print("Czy gramy ponownie?(T/N)\n");
     Scanner in = new Scanner(System.in);
     f = in.next();}
