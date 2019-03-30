@@ -17,14 +17,13 @@ public class GameplayTest {
     private Gameplay sut;
 
     @BeforeEach
-
-    public void setUp () {
+    public void setUp () { ///nie działa
         sut= new Gameplay();
-        originalSystemOut = System.out;
-
-        // given
-        systemOutContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(systemOutContent));
+//        originalSystemOut = System.out;
+//
+//        // given
+//        systemOutContent = new ByteArrayOutputStream();
+//        System.setOut(new PrintStream(systemOutContent));
     }
     @AfterEach
     void restoreSystemOutStream () {
@@ -37,6 +36,7 @@ public class GameplayTest {
 
     @Test
     public void DrawTest () {
+     //   sut= new Gameplay();
 sut.player1= new Player("Zbychu",0);
 sut.player2= new Player("Franek",1);
 
