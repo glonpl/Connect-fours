@@ -7,18 +7,21 @@ public class Player {
     private int id_player;
    private int score;
     static int count=0;
-    Player(String player){
+    Player(String player, int id){
         this.player = player;
-        this.id_player = count;
+        this.id_player = id;
         this.score = 0;
         count+=1;
     }
 
-    public String getPlayerStr() {
+    public String getPlayer() {
         return player;
     }
     public int getPlayerId() {
         return id_player;
     }
     public void PlayerWin() {this.score+=1;}
+    public int getPlayerScore() {
+        return score;
+    }
 }
