@@ -17,7 +17,7 @@ public class StatsTest {
     @DisplayName("Test of Function that gives player names, according to turn")
     public void PrintAllTest () {}
 
-    
+
 
 
 

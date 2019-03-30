@@ -8,7 +8,33 @@ public class Gameplay {
     public Board plansza;
 
 private boolean turn=true;
-    public int StandardBoard(String w) { //0wrong 1 standard  2change
+
+    public boolean SaveGame(){
+        return false;
+    }
+public boolean play(String f, int player1disc, int player2disc)throws Exception {
+    if (f.equals("c")) {
+        if (plansza.backCoin()) {
+            turn = !turn;
+            return true;
+        }
+    } else {
+        int k = Integer.parseInt(f) - 1;
+        if (turn) {
+            if (plansza.putCoin(k, player1disc, this.PlayerNameTurn(turn))) {
+                turn = false;
+                return true;
+            }
+        } else {
+            if (plansza.putCoin(k, player2disc, this.PlayerNameTurn(turn))) {
+                turn = true;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+    public int StandardBoard(String w) {
         if (w.equals("1")){
             return 1;
         }else if (w.equals("2")) {
@@ -33,36 +59,21 @@ public void matchPlay()throws Exception {
     int player1disc = 1;
     int player2disc = 5;
 GameplaySetup();
-    while( (plansza.winner.isEmpty())&(plansza.draw==false)){
+    while( (plansza.winner.isEmpty())&(plansza.draw==false)){//przetestowane
 
-        plansza.printBoard();
+        plansza.printBoard();//przetestowane
 
-        System.out.println("\nGracz " + this.PlayerNameTurn(turn) + ". Wybierz gdzie chcesz wrzucic krazek(1,2,..) c by cofnąć");
+        System.out.println("\nGracz " + this.PlayerNameTurn(turn) + ". Wybierz gdzie chcesz wrzucic krazek(1,2,..) c by cofnąć");//przetestowane
         Scanner in = new Scanner(System.in);
         String f = in.next();
-if(f.equals("c")){
-    if (plansza.backCoin()){
-    turn=!turn;}
-}else {
-    int k = Integer.parseInt(f)-1;
-    if (turn) {
-        if (plansza.putCoin(k, player1disc, this.PlayerNameTurn(turn))) {
-            turn = false;
+        play(f,player1disc,player2disc);//przetestowane
 
-        }
-    } else {
-        if (plansza.putCoin(k, player2disc, this.PlayerNameTurn(turn))) {
-            turn = true;
-
-        }
-    }
-}
     }
     plansza.printBoard();
-    if (plansza.draw){
+    if (plansza.draw){//przetestowane
         System.out.print("\nRemis!!\n");
     }else{
-        System.out.print("\nZwycięża "+plansza.winner+"!\n");
+        System.out.print("\nZwycięża "+plansza.winner+"!\n");//przetestowane
         if(plansza.winner==player1.getPlayer()){
             player1.PlayerWin();
         }else if(plansza.winner==player2.getPlayer()){
@@ -72,7 +83,7 @@ if(f.equals("c")){
     String f="";
     while(!(f.equals("T"))&!(f.equals("N")))
 {
-    System.out.print(player1.getPlayer()+": "+player1.getPlayerScore()+"  "+player2.getPlayer()+": "+player2.getPlayerScore()+"/n");
+    System.out.print(player1.getPlayer()+": "+player1.getPlayerScore()+"  "+player2.getPlayer()+": "+player2.getPlayerScore()+"\n");
     System.out.print("Czy gramy ponownie?(T/N)\n");
     Scanner in = new Scanner(System.in);
     f = in.next();}
@@ -89,26 +100,26 @@ if(f.equals("c")){
             System.out.print("Czy chcesz grać na standartowej planszy?(1-Tak/2-Nie)");
             Scanner in = new Scanner(System.in);
             String w = in.next();
-            k=StandardBoard(w);
+            k=StandardBoard(w);//przetestowane
         }
         if (k==2){
             System.out.print("Podaj rozmiary planszy\n");
             Scanner in = new Scanner(System.in);
             int column = in.nextInt();
             int row=in.nextInt();
-            plansza.setBoardSize(column,row);
+            plansza.setBoardSize(column,row);//przetestowane
         }
 while(player1.getPlayer().isEmpty()){
     System.out.print("Podaj nazwę gracza 1\n");
     Scanner in = new Scanner(System.in);
     String name = in.next();
-    player1.setPlayer(name);
+    player1.setPlayer(name);//przetestowane
 }
         while(player2.getPlayer().isEmpty()){
             System.out.print("Podaj nazwę gracza 2\n");
             Scanner in = new Scanner(System.in);
             String name = in.next();
-            player2.setPlayer(name);
+            player2.setPlayer(name);//przetestowane
         }
 
     }
