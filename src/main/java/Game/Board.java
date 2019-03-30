@@ -6,7 +6,8 @@ public class Board {
     private int height = 6;
     private int width = 7;
     public int[][] board = new int[height][width];
-    protected String winner;
+    protected String winner="";
+    protected boolean draw=false;
     private ArrayList<Integer> history = new ArrayList<>();
 
     public void createBoard() {
@@ -112,6 +113,16 @@ public class Board {
         if(sumhor >= 3 || sumver >=3 || sumdiagdown >= 3 || sumdiagup >= 3) {
             winner = player;
         }
+        int drawcount=0;
+for(int i=0; i<=(width-1); i++){
+    if (board[0][i] == 0){
+        drawcount=1;
+    }
+}
+    if (drawcount==0){
+        draw=true;
+    }
+
 
 
 

@@ -44,7 +44,7 @@ public class PlayerTest {
             assertThat(sut.getPlayerId()&sut1.getPlayerId()).isIn(0,1);
         }
     @Test
-    public void trivialTest() {
+    public void winsTest() {
         sut= new Player("Zbychu",1);
         sut.PlayerWin();
         sut.PlayerWin();
@@ -55,5 +55,11 @@ public class PlayerTest {
     public void TwoIdsGetNameTest() {
         sut= new Player("Zbychu",1);
         assertThat(sut.getPlayer()).contains("Zbychu");
+    }
+    @Test
+    public void NameSetTest() {
+        sut= new Player("Zbychu",1);
+        sut.setPlayer("Karyna");
+        assertThat(sut.getPlayer()).contains("Karyna");
     }
     }

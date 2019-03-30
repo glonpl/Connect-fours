@@ -21,6 +21,7 @@ public class Player {
         return id_player;
     }
     public void PlayerWin() {this.score+=1;}
+    public void setPlayer(String name) {this.player=name;}
     public int getPlayerScore() {
         return score;
     }

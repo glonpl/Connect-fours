@@ -1,10 +1,12 @@
 package Game;
 
 
+import org.assertj.core.api.ObjectAssert;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static org.assertj.core.api.Assertions.*;
@@ -12,12 +14,12 @@ public class GameplayTest {
 
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutContent;
-    static Gameplay sut;
+    private Gameplay sut;
 
     @BeforeEach
 
     public void setUp () {
-
+        sut= new Gameplay();
         originalSystemOut = System.out;
 
         // given
@@ -35,7 +37,10 @@ public class GameplayTest {
 
     @Test
     public void DrawTest () {
+sut.player1.setPlayer("Zbychu");
+sut.player2.setPlayer("Franek");
 
+        assertThat(sut.PlayerNameTurn(true)).isEqualTo("Zbychu");
     }
     @Test
     public void WinTest() {

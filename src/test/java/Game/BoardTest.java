@@ -266,6 +266,36 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
 
         game.printBoard();
         assertThat(systemOutContent.toString(), endsWith("0 0 0 0 0 0 0"));
+
+    }
+    @Test
+    @DisplayName("Checks if draw works")
+    public void DrawTest()throws Exception {
+        game.createBoard();
+        game.setBoardSize(4,4);
+
+
+        game.putCoin(0,1,"Franek");
+        game.putCoin(0,1,"Zbychu");
+        game.putCoin(0,1,"Franek");
+        game.putCoin(0,5,"Zbychu");
+
+        game.putCoin(1,5,"Franek");
+        game.putCoin(1,5,"Zbychu");
+        game.putCoin(1,5,"Franek");
+        game.putCoin(1,1,"Zbychu");
+
+        game.putCoin(2,3,"Franek");
+        game.putCoin(2,3,"Zbychu");
+        game.putCoin(2,3,"Franek");
+        game.putCoin(2,8,"Zbychu");
+        assertThat(game.draw, isOneOf(false));
+        game.putCoin(3,9,"Franek");
+        game.putCoin(3,9,"Zbychu");
+        game.putCoin(3,9,"Franek");
+        game.putCoin(3,8,"Zbychu");
+        assertThat(game.draw, isOneOf(true));
+
     }
 }
 
