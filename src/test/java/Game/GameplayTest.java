@@ -1,13 +1,16 @@
 package Game;
-import org.junit.Test;
+
+
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class GameplayTest {
 
     private PrintStream originalSystemOut;
@@ -17,7 +20,7 @@ public class GameplayTest {
 
     @BeforeEach
     public void setUp () {
-
+        sut= new Gameplay();
         originalSystemOut = System.out;
 
         // given
@@ -36,7 +39,7 @@ public class GameplayTest {
     @Test
     @DisplayName("Test of Function that gives player names, according to turn")
     public void PlayerNameTurnTest () {
-        sut= new Gameplay();
+
 sut.player1= new Player("Zbychu",0);
 sut.player2= new Player("Franek",1);
 
@@ -47,17 +50,74 @@ sut.player2= new Player("Franek",1);
 
     @Test
     @DisplayName("Test of Function that asks what type of board should be created")
-    public void BoardChoiceTest () { //napraw jakos setup
-        sut= new Gameplay();
+    public void BoardChoiceWrongTest () { //napraw jakos setup
+
        sut.StandardBoard("w");
         assertThat(systemOutContent.toString()).isEqualTo("\nZła opcja!\n");
     }
     @Test
-    public void WinTest() {
-//        sut= new Player("Zbychu",0);
-//        Player sut1= new Player("Franek",1);
-//        assertThat(sut.getPlayerId()&sut1.getPlayerId()).isIn(0,1);
+    public void BoardChoiceWrong2Test () { //napraw jakos setup
+
+        sut.StandardBoard("w");
+        assertThat(sut.StandardBoard("w")).isIn(0);
     }
+    @Test
+    @DisplayName("Test of Function that asks what type of board should be created")
+    public void BoardChoice1Test () {
+         assertThat(sut.StandardBoard("1")).isIn(1);
+    }
+    @Test
+    @DisplayName("Test of Function that asks what type of board should be created")
+    public void BoardChoice2Test () {
+          assertThat(sut.StandardBoard("2")).isGreaterThanOrEqualTo(2);
+    }
+
+    @Test
+    public void playGoBackTest()throws Exception {
+        sut.plansza=new Board();
+        sut.plansza.createBoard();
+        sut.player1= new Player("Zbychu",0);
+        sut.player2= new Player("Franek",1);
+        sut.play("c",1,5);
+
+        assertThat(systemOutContent.toString()).containsSequence("cofnąć!");
+
+
+    }
+    @Test
+    public void playExceptionTest() {
+        sut.plansza=new Board();
+        sut.plansza.createBoard();
+        sut.player1= new Player("Zbychu",0);
+        sut.player2= new Player("Franek",1);
+
+        assertThatExceptionOfType(NumberFormatException.class).isThrownBy(()->
+        {sut.play("k",1,5);});
+
+
+    }
+    @Test
+    public void play1Test()throws Exception  {
+       sut.plansza=new Board();
+        sut.plansza.createBoard();
+        sut.player1= new Player("Zbychu",0);
+        sut.player2= new Player("Franek",1);
+
+       assertThat(sut.play("1",1,5)).isTrue();
+
+
+    }
+
+
+
+
+    @Test
+    public void SaveTest() {
+
+//matchplaytest
+//gameplaysetup
+    }
+
     @Test
     public void Point4WinnerTest() {
 //        sut= new Player("Zbychu",1);
