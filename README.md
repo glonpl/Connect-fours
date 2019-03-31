@@ -7,4 +7,4 @@
 * Leaderboards
 * Jacoco
 * Find out what's the deal with string diffrences comparson, between Intelij and travis. Project compiles properly on IDE and doesnt pass tests on travis, while comparing outputs.
-* Put Data-driven-tests from file somwhere  
+* Parametrized from file cant gain acces to src/test somehow :<
