@@ -10,9 +10,9 @@ import java.io.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StatsTest {
+    Stats sut = new Stats();
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutContent;
-    Stats sut = new Stats();
 
     @BeforeEach
     public void setUp() {
@@ -170,6 +170,7 @@ public class StatsTest {
         sut.SaveToFile("TestLeaderboards.txt");
         sut.reset();
         sut.ReadFromFile("TestLeaderboards.txt");
+
         assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
         writer = null;
         try {

@@ -5,16 +5,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class GameplayTest {
 
+    static Gameplay sut;
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutContent;
-    static Gameplay sut;
 
     @BeforeEach
     public void setUp() {
@@ -52,6 +54,7 @@ public class GameplayTest {
         sut.StandardBoard("w");
         assertThat(systemOutContent.toString()).isEqualTo("\nZła opcja!\n");
     }
+
     @DisplayName("Test of Function that asks what type of board should be created, checks returned int")
     @Test
     public void BoardChoiceWrongIntReturnedEqualsZeroTest() {
@@ -104,7 +107,8 @@ public class GameplayTest {
     }
 
     @Test
-    public void play1Test() throws Exception {
+    @DisplayName("Test of putting1 properly ")
+    public void play1ProperTest() {
 
         sut.plansza = new Board();
         sut.plansza.createBoard();
@@ -116,7 +120,7 @@ public class GameplayTest {
 
 
     @Test
-    public void TestSaveWithParams() throws Exception {
+    public void TestSaveWithParams() {
 
         sut.plansza = new Board();
         sut.player1 = new Player("Zbychu", 0);
@@ -141,6 +145,7 @@ public class GameplayTest {
     }
 
     @Test
+
     public void PickDiscFalseTest() {
 
         sut.plansza = new Board();
@@ -148,6 +153,7 @@ public class GameplayTest {
         sut.player2 = new Player("Franek", 1);
         assertThat(sut.pickDisc("N")).isFalse();
     }
+
     @Test
     public void FinishPrintTest() {
 

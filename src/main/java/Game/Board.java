@@ -3,12 +3,12 @@ package Game;
 import java.util.ArrayList;
 
 public class Board {
-    private int height = 6;
-    private int width = 7;
-    public int[][] board = new int[height][width];
     protected String winner = "";
     protected boolean draw = false;
     protected ArrayList<Integer> history = new ArrayList<>();
+    private int height = 6;
+    private int width = 7;
+    public int[][] board = new int[height][width];
 
     public void createBoard() {
         for (int i = 0; i < height; i++) {
@@ -17,6 +17,7 @@ public class Board {
             }
         }
     }
+
 
     public void printBoard() {
 

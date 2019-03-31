@@ -2,11 +2,10 @@ package Game;
 
 public class Player {
 
-
+    static int count = 0;
     private String player;
     private int id_player;
     private int score;
-    static int count = 0;
 
     Player(String player, int id) {
         this.player = player;
@@ -19,16 +18,16 @@ public class Player {
         return player;
     }
 
+    public void setPlayer(String name) {
+        this.player = name;
+    }
+
     public int getPlayerId() {
         return id_player;
     }
 
     public void PlayerWin() {
         this.score += 1;
-    }
-
-    public void setPlayer(String name) {
-        this.player = name;
     }
 
     public int getPlayerScore() {

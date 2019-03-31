@@ -1,6 +1,8 @@
 package Game;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Gameplay {
@@ -10,13 +12,18 @@ public class Gameplay {
     private Stats leaderboards;
     private boolean turn = true;
 
-//********************************helpers****************************
+    public static void main(String args[]) throws Exception {
+
+        Gameplay gameplay = new Gameplay();
+        gameplay.matchPlay();
+    }
+
+    //********************************helpers****************************
     public boolean pickDisc(String f) {
         if (f.equals("T")) {
             return true;
         } else return false;
     }
-
 
     public String PlayerNameTurn(boolean turn) {
         if (turn) {
@@ -25,7 +32,6 @@ public class Gameplay {
             return player2.getPlayer();
         }
     }
-
 
     public int StandardBoard(String w) {
         if (w.equals("1")) {
@@ -38,14 +44,14 @@ public class Gameplay {
         }
     }
 
-    public void finish(){
-        leaderboards=new Stats();
+    public void finish() {
+        leaderboards = new Stats();
         leaderboards.Add(player1);
         leaderboards.Add(player2);
         leaderboards.PrintAll();
     }
 
-//********************************Save to file****************************
+    //********************************Save to file****************************
     public void SaveGame(String filename) {
         String text = "";
         text = text.concat(player1.getPlayer() + ",");
@@ -68,10 +74,8 @@ public class Gameplay {
         }
     }
 
-
-
-//********************************Preparations****************************
-    public void GameplaySetup() {
+    //********************************Preparations****************************
+    public void GameplaySetup() {//not tested, butt all classes inside tested
         plansza = new Board();
         int k = 0;
         while (k == 0) {
@@ -109,7 +113,7 @@ public class Gameplay {
         }
     }
 
-//********************************Game rules****************************
+    //********************************Game rules****************************
     public boolean play(String f, int player1disc, int player2disc) {
         if (f.equals("c")) {
             if (plansza.backCoin()) {
@@ -148,8 +152,9 @@ public class Gameplay {
         return false;
     }
 
-//********************************Actual gameplay****************************
-    public void matchPlay() throws Exception {
+
+    //********************************Actual gameplay****************************
+    public void matchPlay() throws Exception {//not tested, butt all classes inside tested
 
         int player1disc = 1;
         int player2disc = 5;
@@ -194,7 +199,7 @@ public class Gameplay {
         if (f.equals("T")) {
             matchPlay();
         }
-finish();
+        finish();
         leaderboards.SaveToFile("Leaderboards.txt");
         f = "";
         while (!(f.equals("T")) & !(f.equals("N"))) {
@@ -205,12 +210,5 @@ finish();
         if (f.equals("T")) {
             leaderboards.ReadFromFile("Leaderboards.txt");
         }
-    }
-
-
-    public static void main(String args[]) throws Exception {
-
-        Gameplay gameplay = new Gameplay();
-        gameplay.matchPlay();
     }
 }

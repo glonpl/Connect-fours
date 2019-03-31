@@ -6,21 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.FileReader;
 import java.io.PrintStream;
-import java.util.StringTokenizer;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class PlayerTest {
 
+    static Player sut;
+    String line;
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutContent;
     private Board game;
-    static Player sut;
-    String line;
 
     @BeforeEach
 
@@ -79,7 +77,9 @@ public class PlayerTest {
         assertThat(sut.getPlayer()).contains("Zbychu");
     }
 
+
     @Test
+
     public void NameSetTest() {
         sut = new Player("Zbychu", 1);
         sut.setPlayer("Karyna");
