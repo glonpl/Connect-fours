@@ -18,6 +18,7 @@ public class GameplayTest {
 
     @BeforeEach
     public void setUp() {
+
         sut = new Gameplay();
         originalSystemOut = System.out;
         systemOutContent = new ByteArrayOutputStream();
@@ -26,6 +27,7 @@ public class GameplayTest {
 
     @AfterEach
     void restoreSystemOutStream() {
+
         System.setOut(originalSystemOut);
         sut = null;
     }
@@ -44,32 +46,38 @@ public class GameplayTest {
 
 
     @Test
-    @DisplayName("Test of Function that asks what type of board should be created")
-    public void BoardChoiceWrongTest() {
+    @DisplayName("Test of Function that asks what type of board should be created,checks out string")
+    public void BoardChoiceWrongStringOutputMessageCheckTest() {
+
         sut.StandardBoard("w");
         assertThat(systemOutContent.toString()).isEqualTo("\nZła opcja!\n");
     }
-
+    @DisplayName("Test of Function that asks what type of board should be created, checks returned int")
     @Test
-    public void BoardChoiceWrong2Test() { //napraw jakos setup
+    public void BoardChoiceWrongIntReturnedEqualsZeroTest() {
+
         sut.StandardBoard("w");
         assertThat(sut.StandardBoard("w")).isIn(0);
     }
 
     @Test
-    @DisplayName("Test of Function that asks what type of board should be created")
-    public void BoardChoice1Test() {
+    @DisplayName("Test of Function that asks what type of board should be created, proper choice 1")
+    public void BoardChoice1GivesProper1OutputTest() {
+
         assertThat(sut.StandardBoard("1")).isIn(1);
     }
 
     @Test
-    @DisplayName("Test of Function that asks what type of board should be created")
-    public void BoardChoice2Test() {
+    @DisplayName("Test of Function that asks what type of board should be created, proper choice 2")
+    public void BoardChoice2GivesProper2OutputTest() {
+
         assertThat(sut.StandardBoard("2")).isGreaterThanOrEqualTo(2);
     }
 
     @Test
-    public void playGoBackTest() throws Exception {
+    @DisplayName("Test of dealing with exception of putting out coin from an empty board")
+    public void playGoBackCantPullCoinIfNothingThrownInTest() {
+
         sut.plansza = new Board();
         sut.plansza.createBoard();
         sut.player1 = new Player("Zbychu", 0);
@@ -79,8 +87,11 @@ public class GameplayTest {
         assertThat(systemOutContent.toString()).containsSequence("cofnąć!");
     }
 
+
     @Test
+    @DisplayName("Test of putting in wrong column throw exception ")
     public void playExceptionTest() {
+
         sut.plansza = new Board();
         sut.plansza.createBoard();
         sut.player1 = new Player("Zbychu", 0);
@@ -94,6 +105,7 @@ public class GameplayTest {
 
     @Test
     public void play1Test() throws Exception {
+
         sut.plansza = new Board();
         sut.plansza.createBoard();
         sut.player1 = new Player("Zbychu", 0);
@@ -105,6 +117,7 @@ public class GameplayTest {
 
     @Test
     public void TestSaveWithParams() throws Exception {
+
         sut.plansza = new Board();
         sut.player1 = new Player("Zbychu", 0);
         sut.player2 = new Player("Franek", 1);
@@ -112,14 +125,15 @@ public class GameplayTest {
         sut.plansza.createBoard();
         sut.plansza.setBoardSize(4, 4);
         sut.SaveGame("Tested.txt");
-
         File actualFile = new File("Tested.txt");
         File expectedFile = new File("expected.txt");
+
         assertThat(actualFile).hasSameContentAs(expectedFile);
     }
 
     @Test
     public void PickDiscTrueTest() {
+
         sut.plansza = new Board();
         sut.player1 = new Player("Zbychu", 0);
         sut.player2 = new Player("Franek", 1);
@@ -128,10 +142,22 @@ public class GameplayTest {
 
     @Test
     public void PickDiscFalseTest() {
+
         sut.plansza = new Board();
         sut.player1 = new Player("Zbychu", 0);
         sut.player2 = new Player("Franek", 1);
         assertThat(sut.pickDisc("N")).isFalse();
     }
+    @Test
+    public void FinishPrintTest() {
 
+        sut.plansza = new Board();
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player1.PlayerWin();
+        sut.player2 = new Player("Franek", 1);
+        sut.finish();
+        assertThat(systemOutContent.toString()).containsSubsequence("Zbychu:1");
+        assertThat(systemOutContent.toString()).containsSubsequence("Franek:0");
+
+    }
 }
