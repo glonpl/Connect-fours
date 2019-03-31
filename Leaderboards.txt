@@ -1,0 +1,6 @@
+elo:1
+mordo:0
+
+hehe:1
+beka:0
+

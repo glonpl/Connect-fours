@@ -7,6 +7,7 @@ public class Gameplay {
     public Player player1 = new Player("", 0);
     public Player player2 = new Player("", 1);
     public Board plansza;
+    private Stats leaderboards;
     private boolean turn = true;
 
 //********************************helpers****************************
@@ -38,11 +39,12 @@ public class Gameplay {
     }
 
     public void finish(){
-        Stats leaderboards=new Stats();
+        leaderboards=new Stats();
         leaderboards.Add(player1);
         leaderboards.Add(player2);
         leaderboards.PrintAll();
     }
+
 //********************************Save to file****************************
     public void SaveGame(String filename) {
         String text = "";
@@ -193,7 +195,16 @@ public class Gameplay {
             matchPlay();
         }
 finish();
-
+        leaderboards.SaveToFile("Leaderboards.txt");
+        f = "";
+        while (!(f.equals("T")) & !(f.equals("N"))) {
+            System.out.print("Wyświetlić tablice wyników?(T/N)\n");
+            Scanner in = new Scanner(System.in);
+            f = in.next();
+        }
+        if (f.equals("T")) {
+            leaderboards.ReadFromFile("Leaderboards.txt");
+        }
     }
 
 
