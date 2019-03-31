@@ -37,7 +37,7 @@ public class BoardTest {
     }
 
 
-    @Test//junit
+    @Test
     @DisplayName("Default board test")
     public void CreateBoardTest() {
         game.createBoard();
@@ -46,7 +46,7 @@ public class BoardTest {
 
     }
 
-    @Test                                                   //junit
+    @Test
     @DisplayName("Prints 0 filled board test")
     public void CreateBoard0FillPrintTest() {
         game.createBoard();
@@ -54,8 +54,8 @@ public class BoardTest {
         assertEquals(String.format("\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0"), systemOutContent.toString());
     }
 
-    @Test                                                    //junit
-    @DisplayName("Sets wrong new size of a board, Exception test")//can throw exception if x or y <4
+    @Test
+    @DisplayName("Sets wrong new size of a board, Exception test")
     public void SetBoardSizeExceptionThrowTest() {
         game.createBoard();
         assertThrows(Exception.class, () -> {
@@ -66,7 +66,7 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("Sets wrong new size of a board, Exception message test")//can throw exception if x or y <4
+    @DisplayName("Sets wrong new size of a board, Exception message test")
     public void SetBoardSizeExceptionThrowMessageTest() {
         game.createBoard();
         Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -182,7 +182,7 @@ public class BoardTest {
         assertThat(systemOutContent.toString(), endsWith("Wybierz inną!"));
     }
 
-    @Test                                                       //junit
+    @Test
     @DisplayName("Check if returns False if column full ")
     public void FullColumnPutFALSETest() throws Exception {
         game.createBoard();
@@ -315,7 +315,7 @@ public class BoardTest {
         game.putCoin(3, 8, "Zbychu");
         assertThat(game.draw, isOneOf(true));
     }
-    
+
     @Test
     @DisplayName("Check if prints to string properly ")
     public void PrintToStringTest() throws Exception {
