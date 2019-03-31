@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.util.StringTokenizer;
 
 import static org.assertj.core.api.Assertions.*;
+
 public class PlayerTest {
 
     private PrintStream originalSystemOut;
@@ -20,75 +21,68 @@ public class PlayerTest {
     private Board game;
     static Player sut;
     String line;
+
     @BeforeEach
 
-        public void setUp () {
+    public void setUp() {
 
-            originalSystemOut = System.out;
+        originalSystemOut = System.out;
 
-            // given
-            systemOutContent = new ByteArrayOutputStream();
-            System.setOut(new PrintStream(systemOutContent));
-        }
-        @AfterEach
-        void restoreSystemOutStream () {
-            System.setOut(originalSystemOut);
+        // given
+        systemOutContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(systemOutContent));
+    }
 
-                sut = null;
+    @AfterEach
+    void restoreSystemOutStream() {
+        System.setOut(originalSystemOut);
 
-        }
+        sut = null;
+
+    }
 
 
-        @Test
-        public void testFirstId () {
-            sut = new Player("Zbychu",0);
-            assertThat(sut.getPlayerId()).isEqualTo(0);
-        }
-       @Test
-        public void TwoIdsTest() {
-            sut= new Player("Zbychu",0);
-            Player sut1= new Player("Franek",1);
-            assertThat(sut.getPlayerId()&sut1.getPlayerId()).isIn(0,1);
-        }
+    @Test
+    public void testFirstId() {
+        sut = new Player("Zbychu", 0);
+        assertThat(sut.getPlayerId()).isEqualTo(0);
+    }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/testPlayers.csv", numLinesToSkip = 1)
-    void CSVFileTest(String input, boolean expected) {
+    @Test
+    public void TwoIdsTest() {
         sut = new Player("Zbychu", 0);
         Player sut1 = new Player("Franek", 1);
-        assertThat((sut.getPlayer().contains(input))||((sut1.getPlayer().contains(input)))).isIn(expected);
+        assertThat(sut.getPlayerId() & sut1.getPlayerId()).isIn(0, 1);
+    }
+
+    @ParameterizedTest //                                     maven: odmowa dostępu!! :<
+    @CsvFileSource(resources = "/testPlayers.csv", numLinesToSkip = 1)
+    void CSVParamFilePlayerTest(String input, boolean expected) {
+        sut = new Player("Zbychu", 0);
+        Player sut1 = new Player("Franek", 1);
+        assertThat((sut.getPlayer().contains(input)) || ((sut1.getPlayer().contains(input)))).isIn(expected);
     }
 
 
-    @Test
-    public void PlayersParamFileTest() throws Exception {
-        BufferedReader rdr;
-        rdr = new BufferedReader(new FileReader("src/test"));
-        while ((this.line = rdr.readLine()) != null) {
-            StringTokenizer st = new StringTokenizer(this.line);
-
-            sut = new Player("Zbychu", 0);
-            Player sut1 = new Player("Franek", 1);
-            assertThat(sut.getPlayerId() & sut1.getPlayerId()).isIn(0, 1);
-        }
-    }
     @Test
     public void winsTest() {
-        sut= new Player("Zbychu",1);
+        sut = new Player("Zbychu", 1);
         sut.PlayerWin();
         sut.PlayerWin();
         sut.PlayerWin();
         assertThat(sut.getPlayerScore()).isEqualTo(3);
     }
+
     @Test
     public void TwoIdsGetNameTest() {
-        sut= new Player("Zbychu",1);
+        sut = new Player("Zbychu", 1);
         assertThat(sut.getPlayer()).contains("Zbychu");
     }
+
     @Test
     public void NameSetTest() {
-        sut= new Player("Zbychu",1);
+        sut = new Player("Zbychu", 1);
         sut.setPlayer("Karyna");
         assertThat(sut.getPlayer()).contains("Karyna");
     }
-    }
+}
