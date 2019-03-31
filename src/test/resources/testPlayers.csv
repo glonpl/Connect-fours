@@ -1,0 +1,6 @@
+input,expected
+fsa,false
+Zbychu,true
+Franek,true
+Kasia,false
+Anna,false

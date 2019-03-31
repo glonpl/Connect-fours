@@ -1,10 +1,17 @@
 package Game;
-import org.junit.Test;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.FileReader;
 import java.io.PrintStream;
+import java.util.StringTokenizer;
+
 import static org.assertj.core.api.Assertions.*;
 public class PlayerTest {
 
@@ -12,7 +19,7 @@ public class PlayerTest {
     private ByteArrayOutputStream systemOutContent;
     private Board game;
     static Player sut;
-
+    String line;
     @BeforeEach
 
         public void setUp () {
@@ -43,6 +50,28 @@ public class PlayerTest {
             Player sut1= new Player("Franek",1);
             assertThat(sut.getPlayerId()&sut1.getPlayerId()).isIn(0,1);
         }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/testPlayers.csv", numLinesToSkip = 1)
+    void CSVFileTest(String input, boolean expected) {
+        sut = new Player("Zbychu", 0);
+        Player sut1 = new Player("Franek", 1);
+        assertThat((sut.getPlayer().contains(input))||((sut1.getPlayer().contains(input)))).isIn(expected);
+    }
+
+
+    @Test
+    public void PlayersParamFileTest() throws Exception {
+        BufferedReader rdr;
+        rdr = new BufferedReader(new FileReader("src/test"));
+        while ((this.line = rdr.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(this.line);
+
+            sut = new Player("Zbychu", 0);
+            Player sut1 = new Player("Franek", 1);
+            assertThat(sut.getPlayerId() & sut1.getPlayerId()).isIn(0, 1);
+        }
+    }
     @Test
     public void winsTest() {
         sut= new Player("Zbychu",1);

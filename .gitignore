@@ -37,3 +37,6 @@ target/surefire-reports/Game.GameplayTest.txt
 target/surefire-reports/Game.PlayerTest.txt
 target/surefire-reports/TEST-Game.GameplayTest.xml
 target/surefire-reports/TEST-Game.PlayerTest.xml
+src/main/resources/testPlayers.csv
+target/classes/testPlayers.csv
+target/test-classes/testPlayers.csv
