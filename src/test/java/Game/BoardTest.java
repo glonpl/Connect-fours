@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -133,15 +135,17 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
         assertThat(game.winner, containsString("ojte"));
     }
 
-
-
-    @Test                                                           //junit
     @DisplayName("Checks if throws exception while trying to put coin in wrong column ")
-    public void PutToWrongHoleTest()throws Exception {
+    @ParameterizedTest
+    @ValueSource(ints = {-5, 8, 5, -3, 15, Integer.MAX_VALUE}) // six numbers
+    void PutToWrongHoleParametrizedTest(int number) throws Exception{
         game.createBoard();
+        game.setBoardSize(4,4);
+                                                           //junit
+
 
         Throwable exception = assertThrows(Exception.class, () -> {
-            game.putCoin(9,1,"Franek");
+            game.putCoin(number,1,"Franek");
         });
         assertEquals("Nie ma takiej kolumny!", exception.getMessage());
     }
@@ -297,6 +301,8 @@ assertThat(exception.getMessage(),containsString("Za mała plansza! Musi być mi
         assertThat(game.draw, isOneOf(true));
 
     }
+
+    //TEST PRINT TO STRING!!! with params
 }
 
 

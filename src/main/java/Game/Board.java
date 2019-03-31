@@ -8,7 +8,7 @@ public class Board {
     public int[][] board = new int[height][width];
     protected String winner="";
     protected boolean draw=false;
-    private ArrayList<Integer> history = new ArrayList<>();
+    protected ArrayList<Integer> history = new ArrayList<>();
 
     public void createBoard() {
         for(int i=0; i<height; i++) {
@@ -26,6 +26,16 @@ public class Board {
                 System.out.print(" "+board[i][j]);
             }
         }
+    }
+    public String printBoardString(){
+String text="";
+        for(int i=0; i<height; i++) {
+            text=text.concat("\n");
+            for(int j=0; j<width; j++) {
+                text=text.concat(","+board[i][j]);
+            }
+        }
+        return text;
     }
 
     public void setBoardSize(int col, int row) {

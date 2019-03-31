@@ -6,16 +6,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import javax.xml.crypto.MarshalException;
+import java.io.*;
+import java.util.StringTokenizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 public class GameplayTest {
 
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutContent;
-
+    String line;
     static Gameplay sut;
 
     @BeforeEach
@@ -112,12 +114,23 @@ sut.player2= new Player("Franek",1);
 
 
     @Test
-    public void SaveTest() {
+    public void TestSaveWithParams() throws Exception
+    {
+        sut.plansza=new Board();
+        sut.player1= new Player("Zbychu",0);
+        sut.player2= new Player("Franek",1);
+        sut.player1.PlayerWin();
+        sut.plansza.createBoard();
+        sut.plansza.setBoardSize(4,4);
+        sut.SaveGame("Tested.txt");
 
-//matchplaytest
-//gameplaysetup
+        File actualFile = new File("Tested.txt");
+        File expectedFile = new File("expected.txt");
+        assertThat(actualFile).hasSameContentAs(expectedFile);
     }
 
+    //matchplaytest
+//gameplaysetup
     @Test
     public void Point4WinnerTest() {
 //        sut= new Player("Zbychu",1);

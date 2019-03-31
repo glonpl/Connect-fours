@@ -1,5 +1,6 @@
 package Game;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Gameplay {
@@ -9,16 +10,47 @@ public class Gameplay {
 
 private boolean turn=true;
 
-    public boolean SaveGame(){
-        return false;
+    public void SaveGame(String filename){
+        String text="";
+       text= text.concat(player1.getPlayer()+",");
+        text= text.concat(player1.getPlayerScore()+",");
+       text= text.concat(player2.getPlayer()+",");
+        text= text.concat(player2.getPlayerScore()+"");
+        text= text.concat(plansza.printBoardString()+";");
+
+
+       BufferedWriter writer = null;
+        try
+        {
+            writer = new BufferedWriter( new FileWriter( filename));
+            writer.write( text);
+
+        }
+        catch ( IOException e)
+        {
+        }
+        finally
+        {
+            try
+            {
+                if ( writer != null)
+                    writer.close( );
+            }
+            catch ( IOException e)
+            {
+            }
+        }
     }
 public boolean play(String f, int player1disc, int player2disc)throws Exception {
     if (f.equals("c")) {
         if (plansza.backCoin()) {
             turn = !turn;
-            return true;
-        }
-    } else {
+            return true;}
+        }else
+            if (f.equals("s")) {
+
+            SaveGame("saved.txt");
+        } else {
         int k = Integer.parseInt(f) - 1;
         if (turn) {
             if (plansza.putCoin(k, player1disc, this.PlayerNameTurn(turn))) {
