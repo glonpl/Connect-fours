@@ -5,8 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -93,5 +92,96 @@ public class StatsTest {
         assertThat(sut.list.isEmpty()).isTrue();
     }
 
+    @Test
+    @DisplayName("Test if SaveToFile works")
+    public void TofileTest() throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer.write("");
 
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+            }
+        }
+        Player e = new Player("Zbychu", 0);
+        e.PlayerWin();
+        sut.Add(e);
+        Player f = new Player("Ania", 1);
+        f.PlayerWin();
+        f.PlayerWin();
+        f.PlayerWin();
+        sut.Add(f);
+        Player g = new Player("Franek", 0);
+        sut.Add(g);
+        sut.SaveToFile("TestLeaderboards.txt");
+        sut.reset();
+        BufferedReader br = new BufferedReader(new FileReader("TestLeaderboards.txt"));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
+        writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer.write("");
+        } catch (IOException hh) {
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException hh) {
+            }
+        }
+    }
+
+
+    @Test
+    @DisplayName("Test if ReadFromFile works")
+    public void FromFileTest() throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer.write("");
+
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+            }
+        }
+        Player e = new Player("Zbychu", 0);
+        e.PlayerWin();
+        sut.Add(e);
+        Player f = new Player("Ania", 1);
+        f.PlayerWin();
+        f.PlayerWin();
+        f.PlayerWin();
+        sut.Add(f);
+        Player g = new Player("Franek", 0);
+        sut.Add(g);
+        sut.SaveToFile("TestLeaderboards.txt");
+        sut.reset();
+ReadFromFile();
+        assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
+        writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer.write("");
+        } catch (IOException hh) {
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException hh) {
+            }
+        }
+    }
 }

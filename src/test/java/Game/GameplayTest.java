@@ -156,8 +156,9 @@ public class GameplayTest {
         sut.player1.PlayerWin();
         sut.player2 = new Player("Franek", 1);
         sut.finish();
+
         assertThat(systemOutContent.toString()).containsSubsequence("Zbychu:1");
-        assertThat(systemOutContent.toString()).containsSubsequence("Franek:0");
+        assertThat(systemOutContent.toString()).containsSubsequence("Franek:0");//2 asserty, bo maven na travisie inaczej sie czepia.
 
     }
 }
