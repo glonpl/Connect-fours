@@ -169,7 +169,7 @@ public class StatsTest {
         sut.Add(g);
         sut.SaveToFile("TestLeaderboards.txt");
         sut.reset();
-ReadFromFile();
+        sut.ReadFromFile("TestLeaderboards.txt");
         assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
         writer = null;
         try {

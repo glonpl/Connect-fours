@@ -1,9 +1,6 @@
 package Game;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Stats {
@@ -38,7 +35,11 @@ public class Stats {
             //exception handling left as an exercise for the reader
         }
     }
-
-
-
+    public void ReadFromFile(String filename) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(filename));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+    }
 }
