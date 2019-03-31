@@ -37,6 +37,12 @@ public class Gameplay {
         }
     }
 
+    public void finish(){
+        Stats leaderboards=new Stats();
+        leaderboards.Add(player1);
+        leaderboards.Add(player2);
+        leaderboards.PrintAll();
+    }
 //********************************Save to file****************************
     public void SaveGame(String filename) {
         String text = "";
@@ -158,7 +164,6 @@ public class Gameplay {
         }
 
         while ((plansza.winner.isEmpty()) & (plansza.draw == false)) {
-
             plansza.printBoard();
             System.out.println("\nGracz " + this.PlayerNameTurn(turn) + ". Wybierz gdzie chcesz wrzucic krazek(1,2,..) c by cofnąć s by zapisać");//przetestowane
             Scanner in = new Scanner(System.in);
@@ -187,6 +192,8 @@ public class Gameplay {
         if (f.equals("T")) {
             matchPlay();
         }
+finish();
+
     }
 
 
