@@ -128,9 +128,9 @@ public class GameplayTest {
         sut.player1.PlayerWin();
         sut.plansza.createBoard();
         sut.plansza.setBoardSize(4, 4);
-        sut.SaveGame("Tested.txt");
-        File actualFile = new File("Tested.txt");
-        File expectedFile = new File("expected.txt");
+        sut.SaveGame("src/test/resources/Tested.txt");
+        File actualFile = new File("src/test/resources/Tested.txt");
+        File expectedFile = new File("src/test/resources/expected.txt");
 
         assertThat(actualFile).hasSameContentAs(expectedFile);
     }
@@ -168,3 +168,4 @@ public class GameplayTest {
 
     }
 }
+//play exception

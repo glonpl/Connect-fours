@@ -53,7 +53,7 @@ public class PlayerTest {
         assertThat(sut.getPlayerId() & sut1.getPlayerId()).isIn(0, 1);
     }
 
-    @ParameterizedTest //                                     maven: odmowa dostępu!! :<
+    @ParameterizedTest
     @CsvFileSource(resources = "/testPlayers.csv", numLinesToSkip = 1)
     void CSVParamFilePlayerTest(String input, boolean expected) {
         sut = new Player("Zbychu", 0);

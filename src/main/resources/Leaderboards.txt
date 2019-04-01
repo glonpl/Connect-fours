@@ -4,3 +4,6 @@ mordo:0
 hehe:1
 beka:0
 
+elo:1
+ziomek:0
+

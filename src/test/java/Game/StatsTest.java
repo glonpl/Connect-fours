@@ -97,7 +97,7 @@ public class StatsTest {
     public void TofileTest() throws IOException {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer = new BufferedWriter(new FileWriter("/src/test/resources/TestLeaderboards.txt"));
             writer.write("");
 
         } catch (IOException e) {
@@ -118,9 +118,9 @@ public class StatsTest {
         sut.Add(f);
         Player g = new Player("Franek", 0);
         sut.Add(g);
-        sut.SaveToFile("TestLeaderboards.txt");
+        sut.SaveToFile("src/test/resources/TestLeaderboards.txt");
         sut.reset();
-        BufferedReader br = new BufferedReader(new FileReader("TestLeaderboards.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("src/test/resources/TestLeaderboards.txt"));
         String line = null;
         while ((line = br.readLine()) != null) {
             System.out.println(line);
@@ -128,7 +128,7 @@ public class StatsTest {
         assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
         writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer = new BufferedWriter(new FileWriter("src/test/resources/TestLeaderboards.txt"));
             writer.write("");
         } catch (IOException hh) {
         } finally {
@@ -146,7 +146,7 @@ public class StatsTest {
     public void FromFileTest() throws IOException {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer = new BufferedWriter(new FileWriter("src/test/resources/TestLeaderboards.txt"));
             writer.write("");
 
         } catch (IOException e) {
@@ -167,14 +167,14 @@ public class StatsTest {
         sut.Add(f);
         Player g = new Player("Franek", 0);
         sut.Add(g);
-        sut.SaveToFile("TestLeaderboards.txt");
+        sut.SaveToFile("src/test/resources/TestLeaderboards.txt");
         sut.reset();
-        sut.ReadFromFile("TestLeaderboards.txt");
+        sut.ReadFromFile("src/test/resources/TestLeaderboards.txt");
 
         assertThat(systemOutContent.toString()).containsSequence("Zbychu:1");
         writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter("TestLeaderboards.txt"));
+            writer = new BufferedWriter(new FileWriter("src/test/resources/TestLeaderboards.txt"));
             writer.write("");
         } catch (IOException hh) {
         } finally {

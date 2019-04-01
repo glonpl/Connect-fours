@@ -122,7 +122,7 @@ public class Gameplay {
             }
         } else if (f.equals("s")) {
 
-            SaveGame("saved.txt");
+            SaveGame("src/main/resources/saved.txt");
         } else {
 
             int k = Integer.parseInt(f) - 1;
@@ -200,7 +200,7 @@ public class Gameplay {
             matchPlay();
         }
         finish();
-        leaderboards.SaveToFile("Leaderboards.txt");
+        leaderboards.SaveToFile("src/main/resources/Leaderboards.txt");
         f = "";
         while (!(f.equals("T")) & !(f.equals("N"))) {
             System.out.print("Wyświetlić tablice wyników?(T/N)\n");
@@ -208,7 +208,7 @@ public class Gameplay {
             f = in.next();
         }
         if (f.equals("T")) {
-            leaderboards.ReadFromFile("Leaderboards.txt");
+            leaderboards.ReadFromFile("src/main/resources/Leaderboards.txt");
         }
     }
 }
