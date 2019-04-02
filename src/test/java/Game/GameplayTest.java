@@ -5,12 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.PrintStream;
+import java.io.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 
 public class GameplayTest {
 
@@ -90,10 +87,23 @@ public class GameplayTest {
         assertThat(systemOutContent.toString()).containsSequence("cofnąć!");
     }
 
+    @Test
+    @DisplayName("Test of putting out coin from an board true return")
+    public void playGoBackCanPullCoinTrueTest() {
+
+        sut.plansza = new Board();
+        sut.plansza.createBoard();
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        sut.play("1", 1, 5);
+
+
+        assertThat(sut.play("c", 1, 5)).isTrue();
+    }
 
     @Test
     @DisplayName("Test of putting in wrong column throw exception ")
-    public void playExceptionTest() {
+    public void playExceptionKTest() {
 
         sut.plansza = new Board();
         sut.plansza.createBoard();
@@ -105,17 +115,54 @@ public class GameplayTest {
             sut.play("k", 1, 5);
         });
     }
+    @Test
+    @DisplayName("Test of putting in wrong column throw exception ")
+    public void playExceptionTest() {
+
+        sut.plansza = new Board();
+        sut.plansza.createBoard();
+        sut.plansza.setBoardSize(4,4);
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        assertThat(sut.play("11", 1, 5)).isFalse();
+
+    }
+    @Test
+    @DisplayName("Test of putting in wrong column throw exception ")
+    public void playFalseWrongColumnTest() {
+
+        sut.plansza = new Board();
+        sut.plansza.createBoard();
+        sut.plansza.setBoardSize(4,4);
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        assertThat(sut.play("11", 1, 5)).isFalse();
+
+    }
 
     @Test
     @DisplayName("Test of putting1 properly ")
-    public void play1ProperTest() {
+    public void play1ProperTurnFalseTest() {
 
         sut.plansza = new Board();
         sut.plansza.createBoard();
         sut.player1 = new Player("Zbychu", 0);
         sut.player2 = new Player("Franek", 1);
+        sut.play("1", 1, 5);
 
         assertThat(sut.play("1", 1, 5)).isTrue();
+    }
+    @Test
+    @DisplayName("Test of putting1 inproperly ")
+    public void play1ProperTurnFalseExceptionWrongColTest() {
+
+        sut.plansza = new Board();
+        sut.plansza.createBoard();
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        sut.play("1", 1, 5);
+
+        assertThat(sut.play("23", 1, 5)).isFalse();
     }
 
 
@@ -134,7 +181,40 @@ public class GameplayTest {
 
         assertThat(actualFile).hasSameContentAs(expectedFile);
     }
+    @Test
+    public void TestSaveExceptionMessage() {
 
+        sut.plansza = new Board();
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        sut.player1.PlayerWin();
+        sut.plansza.createBoard();
+        sut.plansza.setBoardSize(4, 4);
+
+
+        sut.SaveGame("src/test/resources/Denied.txt");
+        assertThat(systemOutContent.toString()).containsSequence("Failed to save");
+
+    }
+
+
+    @Test
+    public void TestSaveException() {
+
+        sut.plansza = new Board();
+        sut.player1 = new Player("Zbychu", 0);
+        sut.player2 = new Player("Franek", 1);
+        sut.player1.PlayerWin();
+        sut.plansza.createBoard();
+        sut.plansza.setBoardSize(4, 4);
+
+        assertThatNullPointerException().isThrownBy(() ->
+        {
+            sut.SaveGame(null);
+        });
+
+
+    }
     @Test
     public void PickDiscTrueTest() {
 

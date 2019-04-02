@@ -39,6 +39,7 @@ public class Stats {
             out.println(text);
 
         } catch (IOException e) {
+            System.out.print("Failed to save");
         }
     }
 

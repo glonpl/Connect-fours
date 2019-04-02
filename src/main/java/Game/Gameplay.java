@@ -63,15 +63,12 @@ public class Gameplay {
         try {
             writer = new BufferedWriter(new FileWriter(filename));
             writer.write(text);
+            writer.close();
 
         } catch (IOException e) {
-        } finally {
-            try {
-                if (writer != null)
-                    writer.close();
-            } catch (IOException e) {
-            }
+            System.out.print("Failed to save");
         }
+
     }
 
     //********************************Preparations****************************
@@ -122,7 +119,7 @@ public class Gameplay {
             }
         } else if (f.equals("s")) {
 
-            SaveGame("src/main/resources/saved.txt");
+            SaveGame("src/main/resources/saved.txt");//if i test it, will override saved.txt, function is tested in save tests
         } else {
 
             int k = Integer.parseInt(f) - 1;
@@ -135,8 +132,7 @@ public class Gameplay {
                     }
                 } catch (Exception e) {
                     System.out.print("\nNie ma takiej kolumny!\n");
-                    return false;
-                }
+                    return false;}
             } else {
                 try {
                     if (plansza.putCoin(k, player2disc, this.PlayerNameTurn(turn))) {
@@ -145,8 +141,7 @@ public class Gameplay {
                     }
                 } catch (Exception e) {
                     System.out.print("\nNie ma takiej kolumny!\n");
-                    return false;
-                }
+                    return false; }
             }
         }
         return false;

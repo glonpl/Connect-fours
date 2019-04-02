@@ -146,7 +146,8 @@ public class Board {
 
             if (board[0][row] != 0) {
                 System.out.print("Kolumna, pełna! Wybierz inną!");
-                return false;
+
+                //return false;
             } else {
                 for (int i = height - 1; i >= 0; i--) {
 
@@ -157,21 +158,17 @@ public class Board {
                         winCheck(row, i, disc, player);
                         return true;
                     }
-
-
                 }
-                return false;
-
             }
-
         }
+        return false;
     }
 
     public boolean backCoin() {
 
         if (history.isEmpty()) {
             System.out.print("Nie można cofnąć!");
-            return false;
+
         } else {
             int destroy = history.get(history.size() - 1);
             int i = 0;

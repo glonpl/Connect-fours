@@ -57,11 +57,21 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("Sets wrong new size of a board, Exception test")
-    public void SetBoardSizeExceptionThrowTest() {
+    @DisplayName("Sets wrong new size of a board, Exception COLUMN test")
+    public void SetBoardSizeTooFewColExceptionThrowTest() {
         game.createBoard();
         assertThrows(Exception.class, () -> {
             game.setBoardSize(2, 5);
+        });
+
+
+    }
+    @Test
+    @DisplayName("Sets wrong new size of a board, Exception Row test")
+    public void SetBoardSizeTooFewRowsExceptionThrowTest() {
+        game.createBoard();
+        assertThrows(Exception.class, () -> {
+            game.setBoardSize(8, 1);
         });
 
 

@@ -1,5 +1,6 @@
 package Game;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIOException;
 
 public class StatsTest {
     Stats sut = new Stats();
@@ -140,7 +143,39 @@ public class StatsTest {
         }
     }
 
+    @Test
+    @DisplayName("Test if SaveToFile catches Exception")
+    public void TofileExceptionTest() {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter("/src/test/resources/TestLeaderboards.txt"));
+            writer.write("");
 
+        } catch (IOException e) {
+        } finally {
+            try {
+                if (writer != null)
+                    writer.close();
+            } catch (IOException e) {
+            }
+        }
+        Player e = new Player("Zbychu", 0);
+        e.PlayerWin();
+        sut.Add(e);
+        Player f = new Player("Ania", 1);
+        f.PlayerWin();
+        f.PlayerWin();
+        f.PlayerWin();
+        sut.Add(f);
+        Player g = new Player("Franek", 0);
+        sut.Add(g);
+
+        sut.SaveToFile("src/test/resources/Denied.txt");
+      assertThat(systemOutContent.toString()).containsSequence("Failed to save");
+
+        sut.reset();
+
+    }
     @Test
     @DisplayName("Test if ReadFromFile works")
     public void FromFileTest() throws IOException {
