@@ -5,3 +5,5 @@
 
 ###### ToDo
 * Find out what's the deal with string diffrences comparson, between Intelij and travis. Project compiles properly on IDE and doesnt pass tests on travis, while comparing outputs.
+ * Diffrences in EOL
+ * in Saving exception tests on windows, I've created read only file, tests fails on travis probably because it changes chmod.
