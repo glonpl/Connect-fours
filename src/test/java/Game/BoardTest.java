@@ -47,7 +47,7 @@ public class BoardTest {
         assertTrue(game.board.length == 6 && game.board[0].length == 7);
 
     }
-
+/*
     @Test
     @DisplayName("Prints 0 filled board test")
     public void CreateBoard0FillPrintTest() {
@@ -55,7 +55,7 @@ public class BoardTest {
         game.printBoard();
         assertEquals(String.format("\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0\r\n 0 0 0 0 0 0 0"), systemOutContent.toString());
     }
-
+*/
     @Test
     @DisplayName("Sets wrong new size of a board, Exception COLUMN test")
     public void SetBoardSizeTooFewColExceptionThrowTest() {
@@ -96,7 +96,7 @@ public class BoardTest {
         assertThat((game.board.length == 9 && game.board[0].length == 9), isOneOf(true));
 
     }
-
+/*
     @Test
     @DisplayName("Prints 9x9 test")
     public void Board9x9PrintTest() {
@@ -105,7 +105,7 @@ public class BoardTest {
         game.printBoard();
         assertThat(systemOutContent.toString(), startsWith("\r\n 0 0 0 0 0 0 0 0 0"));
     }
-
+*/
     @Test
     @DisplayName("Win pattern test | ")
     public void WinCheckTestVer() {
